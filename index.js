@@ -60,7 +60,7 @@ function selectDifficulty() {
 function initializeCards() {
     //$("#game_grid").empty();
 
-    fetch('https://pokeapi.co/api/v2/pokemon?limit=150')
+    fetch('https://pokeapi.co/api/v2/pokemon?limit=450')
     .then(response => response.json())
     .then(data => {
         let pokemonCollection = data.results;

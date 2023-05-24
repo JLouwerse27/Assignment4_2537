@@ -62,7 +62,7 @@ img {
   transform: rotateY(180deg);
 }
 
-.powerUp {
+.powerUp:not(.flip) {
   transform: rotateY(180deg);
 }
 
