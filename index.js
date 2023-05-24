@@ -40,13 +40,13 @@ function selectDifficulty() {
 
         switch ($(this).attr("id")) {
             case "easy":
-                time = 12;
+                time = 30;
                 break;
             case "medium":
-                time = 40;
+                time = 100;
                 break;
             default:
-                time = 85;
+                time = 200;
         }
 
         initializeCards();
