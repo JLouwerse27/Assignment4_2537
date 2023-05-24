@@ -10,6 +10,7 @@ function setState(state) {
         $("#stats").show();
         $("#game_grid").show();
         $("#reset").show();
+        $("#colourButtons").show();
         console.log("game state");
     } else if(state == "MENU") {
         DIFFICULTY = undefined;
@@ -17,6 +18,7 @@ function setState(state) {
         $("#stats").hide();
         $("#game_grid").hide();
         $("#reset").hide();
+        $("#colourButtons").hide();
         $("#difficulties").show();
         $("#start").show();
         console.log("menu state");
@@ -41,10 +43,10 @@ function selectDifficulty() {
                 time = 10;
                 break;
             case "medium":
-                time = 30;
+                time = 40;
                 break;
             default:
-                time = 60;
+                time = 85;
         }
 
         initializeCards();
@@ -213,7 +215,7 @@ const setup = () => {
 
             winCheckTimeout = setTimeout(() => {
                 if ($(".card:not(.no-click)").length === 0) {
-                    alert("You have won!");
+                    alert(`You've won in ${clickCount} clicks with ${time} seconds left to spare!`);
                     reset();
                 }
             }, 1000);
@@ -229,7 +231,20 @@ const setup = () => {
     }
 };
 
+//Change the backgroun colour of the cards
+$("#dark").on("click", function () {
+    $(".front_face").removeClass("sepia");
+    $(".front_face").addClass("dark");
+    $(".back_face").removeClass("sepia");
+    $(".back_face").addClass("dark");
+});
 
+$("#sepia").on("click", function () {
+    $(".front_face").removeClass("dark");
+    $(".front_face").addClass("sepia");
+    $(".back_face").removeClass("dark");
+    $(".back_face").addClass("sepia");
+});
 
 $(document).ready(selectDifficulty);
 //$(document).ready(setup);

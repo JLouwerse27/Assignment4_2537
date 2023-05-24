@@ -28,6 +28,7 @@ function reset() {
     setState("MENU");
     //time = 0;
     clickCount = 0;
+    pairs = 0;
     timeDisplay.textContent = time;
     isRunning = false;
     // startButton.style = "display: block;";

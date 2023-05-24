@@ -37,14 +37,25 @@ img {
   width: 100%
 }
 
-.front_face,
-.back_face {
+.front_face, .back_face {
   position: absolute;
   backface-visibility: hidden;
 }
 
-.back_face.aqua {
-  background-color: aqua;
+.back_face.dark {
+  background-color: rgb(15, 18, 23);
+}
+
+.front_face.dark {
+  background-color: rgb(15, 18, 23);
+}
+
+.back_face.sepia {
+  background-color: rgb(170, 118, 15);
+}
+
+.front_face.sepia {
+  background-color: rgb(170, 118, 15);
 }
 
 .flip {
