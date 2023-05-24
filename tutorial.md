@@ -11,3 +11,11 @@
 # Step 9. Corner case 2. If the user clicks on a card that is already matched, do nothing.
 # Step 10. Corner case 3. If the user clicks on a card while two cards are already flipped, do nothing
 # Step 11a. Add the winning event. If user clicks on all the cards, display a winning message
+# Step 11b. Add a header showing the number of clicks the user has made, and the number of pairs left,
+#           number of pairs matched, and total number of pairs.
+# Step 12a. Add a timer to the game.
+# Step 12b. Show the time in the header
+# Step 13. Add a reset button to the game
+# Step 14. Add a start button to the game.
+# Step 15.a Add a difficulty level to the game. Show the levels controls to the header
+# Step 15.b Add the logic to the difficulty levels

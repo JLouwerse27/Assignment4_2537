@@ -11,9 +11,21 @@ body {
   flex-wrap: wrap;
 }
 
+#game_grid.medium {
+  width: 800px;
+  height: 800px;
+  
+}
+
+#game_grid.hard {
+  width: 1200px;
+  height: 800px;
+}
+
+
 
 .card {
-  width: 33.3%;
+  width: 200px;
   position: relative;
   transition: transform 1s;
   perspective: 1000px;
@@ -31,6 +43,9 @@ img {
   backface-visibility: hidden;
 }
 
+.back_face.aqua {
+  background-color: aqua;
+}
 
 .flip {
   transform: rotateY(180deg);

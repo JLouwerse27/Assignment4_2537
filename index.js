@@ -1,14 +1,152 @@
+let clickCount = 0;
+let pairs = 0;
+let totalPairs; //default, changes based off diff
+let DIFFICULTY = undefined;
+
+function setState(state) {
+    if(state == "GAME") {
+        $("#difficulties").hide();
+        $("#start").hide();
+        $("#stats").show();
+        $("#game_grid").show();
+        $("#reset").show();
+        console.log("game state");
+    } else if(state == "MENU") {
+        $("#stats").hide();
+        $("#game_grid").hide();
+        $("#reset").hide();
+        $("#difficulties").show();
+        $("#start").show();
+        console.log("menu state");
+    }
+}
+setState("MENU");
+
+function selectDifficulty() {
+    // Default to easy difficulty
+    totalPairs = 3;
+
+    $("#easy, #medium, #hard").on("click", function () {
+        totalPairs = this.value;
+        DIFFICULTY = $(this).attr("id");
+
+        $("#game_grid").removeClass();
+        $("#game_grid").addClass($(this).attr("id"));
+        $("#game_grid").empty();
+
+        initializeCards();
+
+        //setState("GAME");
+        //makeGrid();
+    });
+}
+
+
+function initializeCards() {
+    //$("#game_grid").empty();
+
+    fetch('https://pokeapi.co/api/v2/pokemon?limit=150')
+    .then(response => response.json())
+    .then(data => {
+        let pokemonCollection = data.results;
+        let randomPokemon = [];
+
+        // Pick random Pokemon based off the selected difficulty
+        for (let i = 0; i < totalPairs; i++) {
+            let randomIndex = Math.floor(Math.random() * pokemonCollection.length);
+            randomPokemon.push(pokemonCollection[randomIndex]);
+        }
+
+        // For each random Pokemon, get the Pokemon's data (including image URL)
+        Promise.all(
+        randomPokemon.map((pokemon, index) => {
+            // Return a new Promise for each fetch request
+            return fetch(pokemon.url)
+            .then(response => response.json())
+            .then(pokemonData => {
+                // Create two new cards with the Pokemon's image
+                for (let i = 0; i < 2; i++) {
+                let card = `
+                    <div class="card">
+                    <img id="img${index * 2 + i + 1}" class="front_face" src="${pokemonData.sprites.front_default}" alt="${pokemonData.name}">
+                    <img class="back_face" src="back.webp" alt="">
+                    </div>
+                `;
+
+                // Append the new card to the game grid
+                $("#game_grid").append(card);
+                }
+            });
+        })
+        ).then(() => {
+        // Now that all fetch requests have completed, we can shuffle the cards and calculate totalPairs
+
+        //shuffleCards();
+
+        //totalPairs = $(".card").length / 2;
+        console.log("Cards: " + totalPairs);
+        //$("#remaining-pairs").text(`Remaining Pairs: ${totalPairs}`);
+
+        // Show the game
+        //$("#game").show();
+
+        setup();
+
+        //startTimer();
+        });
+    });
+
+}
+
+
+function makeGrid() {
+    //$("#game_grid").empty();
+    for (i = 0; i < totalPairs * 2; i++) {
+        var cardDiv = $("<div>").addClass("card");
+        // Create the front face image element
+        var frontFaceImg = $("<img>")
+            .attr("id", `img${i+1}`)
+            .addClass("front_face")
+            .attr("src", "001.png")
+            .attr("alt", "");
+
+        // Create the back face image element
+        var backFaceImg = $("<img>")
+            .addClass("back_face")
+            .attr("src", "back.webp")
+            .attr("alt", "");
+
+        // Append the front and back face images to the card div
+        cardDiv.append(frontFaceImg, backFaceImg);
+
+        // Append the card div to the game_grid div
+        $("#game_grid").append(cardDiv);
+    }
+    $("#game_grid").append();
+    setup();
+}
+
 const setup = () => {
     let firstCard = undefined;
     let secondCard = undefined;
     let winCheckTimeout = null;
-    $(".card").on("click", function () {
 
+    $("#click-counter").text(`Number of Clicks: ${clickCount}`);
+    $("#pairsLeft").text(`Pairs Left: ${totalPairs - pairs}`);
+    $("#pairsMatch").text(`Pairs Matched: ${pairs}`);
+    $("#noPairs").text(`Total pairs: ${totalPairs}`);
+
+    $(".card").on("click", function () {
         if (winCheckTimeout !== null) {
             clearTimeout(winCheckTimeout);
             winCheckTimeout = null;
         }
-        
+
+        if (!$(this).hasClass("flip")) {
+            clickCount++;
+            $("#click-counter").text(`Number of Clicks: ${clickCount}`);
+        }
+
         if (!firstCard) {
             $(this).toggleClass("flip");
 
@@ -21,7 +159,6 @@ const setup = () => {
                 if (!(firstCard.id == secondCard.id)) {
                     $(this).toggleClass("flip");
                     match();
-                    
                 } else {
                     console.log("same id");
 
@@ -44,12 +181,17 @@ const setup = () => {
             firstCard = undefined;
             secondCard = undefined;
 
+            pairs++;
+
+            $("#pairsLeft").text(`Pairs Left: ${totalPairs - pairs}`);
+            $("#pairsMatch").text(`Pairs Matched: ${pairs}`);
+            $("#noPairs").text(`Total pairs: ${totalPairs}`);
+
             winCheckTimeout = setTimeout(() => {
                 if ($(".card:not(.no-click)").length === 0) {
                     alert("You have won!");
                 }
             }, 1000);
-
         } else {
             console.log("no match");
             setTimeout(() => {
@@ -62,4 +204,7 @@ const setup = () => {
     }
 };
 
-$(document).ready(setup);
+
+
+$(document).ready(selectDifficulty);
+//$(document).ready(setup);

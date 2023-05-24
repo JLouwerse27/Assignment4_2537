@@ -1,44 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Joseph's Memory Game</title>
+        <link rel="stylesheet" href="style.css" />
+        <!-- import jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        
+    </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Joseph's Memory Game</title>
-  <link rel="stylesheet" href="style.css">
-  <!-- import jQuery -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="index.js"></script>
-</head>
+    <body>
+        <div id="menu">
+            <div id="difficulties">
+                <button id="easy" value="3">Easy</button>
+                <button id="medium" value="8">Medium</button>
+                <button id="hard" value="12">Hard</button>
+            </div>
+            <button id="reset">Reset</button>
+            <button id="start">Start</button>
+        </div>
+        <div id="stats">
+            <h1 id="click-counter">Number of Clicks</h1>
+            <h1 id="pairsLeft">Pairs Left</h1>
+            <h1 id="pairsMatch">Pairs Matched</h1>
+            <h1 id="noPairs">Total Number of Pairs</h1>
+            <h1 id="time">You have 100 seconds left. Time passed</h1>
+        </div>
+        <div id="game_grid">
+            <div class="card">
+                <img id="img1" class="front_face" src="001.png" alt="" />
+                <img class="back_face" src="back.webp" alt="" />
+            </div>
+            <div class="card">
+                <img id="img2" class="front_face" src="002.png" alt="" />
+                <img class="back_face" src="back.webp" alt="" />
+            </div>
+            <div class="card">
+                <img id="img3" class="front_face" src="003.png" alt="" />
+                <img class="back_face" src="back.webp" alt="" />
+            </div>
+            <div class="card">
+                <img id="img4" class="front_face" src="001.png" alt="" />
+                <img class="back_face" src="back.webp" alt="" />
+            </div>
+            <div class="card">
+                <img id="img5" class="front_face" src="002.png" alt="" />
+                <img class="back_face" src="back.webp" alt="" />
+            </div>
+            <div class="card">
+                <img id="img6" class="front_face" src="003.png" alt="" />
+                <img class="back_face" src="back.webp" alt="" />
+            </div>
+        </div>
 
-<body>
-  <div id="game_grid">
-    <div class="card">
-      <img id="img1" class="front_face" src="001.png" alt="">
-      <img class="back_face" src="back.webp" alt="">
-    </div>
-    <div class="card">
-      <img id="img2" class="front_face" src="002.png" alt="">
-      <img class="back_face" src="back.webp" alt="">
-    </div>
-    <div class="card">
-      <img id="img3" class="front_face" src="003.png" alt="">
-      <img class="back_face" src="back.webp" alt="">
-    </div>
-    <div class="card">
-      <img id="img4" class="front_face" src="001.png" alt="">
-      <img class="back_face" src="back.webp" alt="">
-    </div>
-    <div class="card">
-      <img id="img5" class="front_face" src="002.png" alt="">
-      <img class="back_face" src="back.webp" alt="">
-    </div>
-    <div class="card">
-      <img id="img6" class="front_face" src="003.png" alt="">
-      <img class="back_face" src="back.webp" alt="">
-    </div>
-  </div>
-</body>
-
+        <script src="time.js"></script>
+        <script src="index.js"></script>
+    </body>
 </html>
