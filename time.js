@@ -19,7 +19,7 @@ function start(){
         setState("GAME");
         interval = setInterval(() => {
             time--;  // Update every second
-            if(Math.random() < 0.05) {
+            if(Math.random() < 0.1) {
                 powerUp();
             }
             updateTimeDisplay();

@@ -62,6 +62,9 @@ img {
   transform: rotateY(180deg);
 }
 
+.powerUp {
+  transform: rotateY(180deg);
+}
 
 .front_face {
   transform: rotateY(180deg);

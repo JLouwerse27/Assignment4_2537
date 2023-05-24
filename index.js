@@ -249,12 +249,12 @@ $("#sepia").on("click", function () {
 function powerUp() {
 
     console.log("POWER UP ACTIVATE");
-    
-    $(".card:not(.flip)").addClass("powerUp flip");
+
+    $(".card:not(.flip)").addClass("powerUp");
 
 
     setTimeout(function() {
-        $(".card.powerUp").removeClass("powerUp flip");
+        $(".card.powerUp").removeClass("powerUp");
     }, 1000);
 }
 
