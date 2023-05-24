@@ -49,7 +49,7 @@ function selectDifficulty() {
                 time = 200;
         }
 
-        initializeCards();
+        // initializeCards();
 
         //setState("GAME");
         //makeGrid();

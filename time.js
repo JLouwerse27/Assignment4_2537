@@ -16,6 +16,7 @@ function updateTimeDisplay() {
 
 function start(){
     if(DIFFICULTY) {
+        initializeCards();
         setState("GAME");
         interval = setInterval(() => {
             time--;  // Update every second
