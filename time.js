@@ -8,7 +8,7 @@ const timeDisplay = document.getElementById('time');
 function updateTimeDisplay() {
     timeDisplay.textContent = 
         `You have ${time} seconds left.`;
-    if(time <= 0) {
+    if(time < 0) {
         alert("Times up!");
         reset();
     }

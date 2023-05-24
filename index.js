@@ -40,7 +40,7 @@ function selectDifficulty() {
 
         switch ($(this).attr("id")) {
             case "easy":
-                time = 10;
+                time = 12;
                 break;
             case "medium":
                 time = 40;
