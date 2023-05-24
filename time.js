@@ -1,4 +1,4 @@
-let time = 0;
+let time = 100;
 let isRunning = false;
 
 const startButton = document.getElementById('start');
@@ -7,42 +7,26 @@ const timeDisplay = document.getElementById('time');
 
 function updateTimeDisplay() {
     timeDisplay.textContent = 
-        `You have ${100 - time} seconds left.`;
+        `You have ${time} seconds left.`;
+    if(time <= 0) {
+        alert("Times up!");
+        reset();
+    }
 }
-
-// function startReset() {
-//     if (!isRunning) {
-//         isRunning = true;
-//         startButton.style = "display: none;";
-//         resetButton.style = "display: block;";
-//         interval = setInterval(() => {
-//             time++;  // Update every second
-//             updateTimeDisplay();
-//         }, 1000);
-//     } else {
-//         time = 0;
-//         timeDisplay.textContent = time;
-//         isRunning = false;
-//         startButton.style = "display: block;";
-//         resetButton.style = "display: none;";
-//         clearInterval(interval);
-//     }
-// }
 
 function start(){
     if(DIFFICULTY) {
         setState("GAME");
         interval = setInterval(() => {
-            time++;  // Update every second
+            time--;  // Update every second
             updateTimeDisplay();
         }, 1000);
-    }
+    } 
 }
-
 
 function reset() {
     setState("MENU");
-    time = 0;
+    //time = 0;
     clickCount = 0;
     timeDisplay.textContent = time;
     isRunning = false;
@@ -51,7 +35,6 @@ function reset() {
     clearInterval(interval);
     // setup();
 }
-
 
 startButton.addEventListener('click', start);
 resetButton.addEventListener('click', reset);

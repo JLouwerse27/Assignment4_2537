@@ -12,6 +12,8 @@ function setState(state) {
         $("#reset").show();
         console.log("game state");
     } else if(state == "MENU") {
+        DIFFICULTY = undefined;
+        //time = 0;
         $("#stats").hide();
         $("#game_grid").hide();
         $("#reset").hide();
@@ -33,6 +35,17 @@ function selectDifficulty() {
         $("#game_grid").removeClass();
         $("#game_grid").addClass($(this).attr("id"));
         $("#game_grid").empty();
+
+        switch ($(this).attr("id")) {
+            case "easy":
+                time = 10;
+                break;
+            case "medium":
+                time = 30;
+                break;
+            default:
+                time = 60;
+        }
 
         initializeCards();
 
@@ -68,7 +81,7 @@ function initializeCards() {
                 for (let i = 0; i < 2; i++) {
                 let card = `
                     <div class="card">
-                    <img id="img${index * 2 + i + 1}" class="front_face" src="${pokemonData.sprites.front_default}" alt="${pokemonData.name}">
+                    <img id="img${index * 2 + i + 1}" class="front_face" src="${pokemonData.sprites.other['official-artwork'].front_default}" alt="${pokemonData.name}">
                     <img class="back_face" src="back.webp" alt="">
                     </div>
                 `;
@@ -81,7 +94,7 @@ function initializeCards() {
         ).then(() => {
         // Now that all fetch requests have completed, we can shuffle the cards and calculate totalPairs
 
-        //shuffleCards();
+        shuffleCards();
 
         //totalPairs = $(".card").length / 2;
         console.log("Cards: " + totalPairs);
@@ -98,6 +111,17 @@ function initializeCards() {
 
 }
 
+function shuffleCards() {
+    let cards = $("#game_grid").children();
+    let cardArray = $.makeArray(cards);
+  
+    // Actually perform the shuffle
+    cardArray.sort(function () { return Math.random() - 0.5; });
+  
+    // Empty the game grid and re-append the cards in the new order
+    $("#game_grid").empty();
+    $.each(cardArray, function (idx, itm) { $("#game_grid").append(itm); });
+  }
 
 function makeGrid() {
     //$("#game_grid").empty();
@@ -190,6 +214,7 @@ const setup = () => {
             winCheckTimeout = setTimeout(() => {
                 if ($(".card:not(.no-click)").length === 0) {
                     alert("You have won!");
+                    reset();
                 }
             }, 1000);
         } else {
