@@ -246,5 +246,18 @@ $("#sepia").on("click", function () {
     $(".back_face").addClass("sepia");
 });
 
+function powerUp() {
+
+    console.log("POWER UP ACTIVATE");
+    
+    $(".card:not(.flip)").addClass("powerUp flip");
+
+
+    setTimeout(function() {
+        $(".card.powerUp").removeClass("powerUp flip");
+    }, 1000);
+}
+
+
 $(document).ready(selectDifficulty);
 //$(document).ready(setup);
